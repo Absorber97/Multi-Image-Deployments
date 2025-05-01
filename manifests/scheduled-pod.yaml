@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-scheduled
+  namespace: team-apps
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: gke-k8s-lab-cluster-default-pool-4a45c007-0d7t
+  containers:
+  - name: sleeper
+    image: busybox
+    command: ["sleep", "3600"]

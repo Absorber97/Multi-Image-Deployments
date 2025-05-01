@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-mgt-back
+  namespace: team-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-mgt-back
+  template:
+    metadata:
+      labels:
+        app: task-mgt-back
+    spec:
+      containers:
+      - name: task-mgt-back
+        image: sangminmattlee/task-mgt-back:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: task-mgt-back-config 

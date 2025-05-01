@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: chatbot-agent
+  namespace: team-apps
+spec:
+  selector:
+    matchLabels:
+      app: chatbot-agent
+  template:
+    metadata:
+      labels:
+        app: chatbot-agent
+    spec:
+      containers:
+      - name: chatbot
+        image: ghcr.io/absorber97/sfbu-rag-chatbot:latest

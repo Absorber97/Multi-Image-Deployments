@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: team-ingress
+  namespace: team-apps
+  annotations:
+    kubernetes.io/ingress.allow-http: "true"
+    ingress.gcp.kubernetes.io/pre-shared-cert: ""
+    kubernetes.io/ingress.global-static-ip-name: ""
+spec:
+  ingressClassName: gce
+  rules:
+  - host: api.lab.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-backend-svc
+            port:
+              number: 8080
+  - host: ui.lab.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-frontend-svc
+            port:
+              number: 3000 

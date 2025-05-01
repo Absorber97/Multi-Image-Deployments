@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-mgt-front
+  namespace: team-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-mgt-front
+  template:
+    metadata:
+      labels:
+        app: task-mgt-front
+    spec:
+      containers:
+      - name: task-mgt-front
+        image: sangminmattlee/task-mgt-front:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-mgt-front-svc
+  namespace: team-apps
+spec:
+  selector:
+    app: task-mgt-front
+  ports:
+  - port: 80
+    targetPort: 80

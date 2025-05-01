@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sfbu-rag-chatbot
+  namespace: team-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sfbu-rag-chatbot
+  template:
+    metadata:
+      labels:
+        app: sfbu-rag-chatbot
+    spec:
+      containers:
+      - name: rag-chatbot
+        image: ghcr.io/absorber97/sfbu-rag-chatbot:latest
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sfbu-rag-chatbot-svc
+  namespace: team-apps
+spec:
+  selector:
+    app: sfbu-rag-chatbot
+  ports:
+  - port: 8000
+    targetPort: 8000

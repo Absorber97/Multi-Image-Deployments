@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: team-apps
+spec:
+  selector:
+    app: task-mgt-back  # This should match the label of your backend pods
+  ports:
+  - port: 5000  # This should match the port of your backend service
+    targetPort: 5000  # This should match the targetPort of your backend service
+  type: ClusterIP 

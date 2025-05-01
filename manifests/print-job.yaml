@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: print-job
+  namespace: team-apps
+spec:
+  template:
+    spec:
+      containers:
+      - name: printer
+        image: busybox
+        command: ["echo", "Hello from Kubernetes!"]
+      restartPolicy: Never

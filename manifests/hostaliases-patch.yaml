@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-mgt-back
+  namespace: team-apps
+spec:
+  template:
+    spec:
+      hostAliases:
+      - ip: "34.118.232.10"  # The ClusterIP of postgres service
+        hostnames:
+        - "localhost" 

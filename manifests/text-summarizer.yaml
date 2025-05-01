@@ -1,0 +1,34 @@
+# manifests/text-summarizer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: text-summarizer
+  namespace: team-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: text-summarizer
+  template:
+    metadata:
+      labels:
+        app: text-summarizer
+    spec:
+      containers:
+      - name: text-summarizer
+        image: vaishnavi447/text-summarizer-app:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: text-summarizer-svc
+  namespace: team-apps
+spec:
+  selector:
+    app: text-summarizer
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

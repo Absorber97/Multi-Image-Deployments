@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily-heartbeat
+  namespace: team-apps
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: heartbeat
+            image: busybox
+            command: ["echo", "🕐 Daily heartbeat"]
+          restartPolicy: Never
